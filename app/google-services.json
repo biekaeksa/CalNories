@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1041558281822",
+    "project_id": "calnories"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041558281822:android:1efc28b230445155",
+        "android_client_info": {
+          "package_name": "com.spiderman.calnories"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1041558281822-10c49dp330dv11fkj1qhamfo45fsbsja.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1041558281822-lt223dkk835mn84no57srobisrhu044e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.spiderman.calnories",
+            "certificate_hash": "211465a4bf1bc391695c06e4efd8700196a1465f"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMwGt8-C8vIoZOg1t4Bn69j9MsWJ-Fd1A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
