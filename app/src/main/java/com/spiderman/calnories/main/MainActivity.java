@@ -20,7 +20,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.spiderman.calnories.R;
+import com.spiderman.calnories.category.CategoryFragment;
 import com.spiderman.calnories.profile.ProfileFragment;
+import com.spiderman.calnories.reminder.ReminderFragment;
 import com.spiderman.calnories.signInGoogle.LoginActivity;
 import com.spiderman.calnories.util.SessionUtils;
 
@@ -42,14 +44,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             int id = item.getItemId();
             switch (id){
-                case R.id.nav_camera :
-                    fragment = new ProfileFragment();
+                case R.id.nav_alarm :
+                    fragment = new ReminderFragment();
+                    getSupportActionBar().setTitle("Reminder");
                     break;
-                case R.id.nav_gallery :
-                    fragment = new ProfileFragment();
+                case R.id.nav_calorie :
+                    fragment = new CategoryFragment();
+                    getSupportActionBar().setTitle("Calorie");
                     break;
-                case R.id.nav_slideshow :
+                case R.id.nav_home :
                     fragment = new ProfileFragment();
+                    getSupportActionBar().setTitle("Home");
                     break;
             }
             final FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -66,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Home");
         loginInit();
         if (savedInstanceState == null) {
             Fragment fragment = null;
@@ -83,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         fragmentManager = getSupportFragmentManager();
         disalbeShifting();
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        bottomNavigationView.getMenu().findItem(R.id.nav_slideshow).setChecked(true);
+        bottomNavigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
     }
 
     @Override

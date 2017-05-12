@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardBackgroundColor="@color/cardview_light_background"
+    app:cardCornerRadius="3dp"
+    app:cardElevation="1dp"
+    app:cardUseCompatPadding="true"
+    app:contentPaddingBottom="16dp"
+    app:contentPaddingLeft="12dp"
+    app:contentPaddingRight="12dp"
+    app:contentPaddingTop="16dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/food_imageview"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:src="@color/colorRed" />
+
+        <RelativeLayout
+            android:id="@+id/food_linearlayout"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@id/food_imageview"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/food_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:lines="1"
+                android:text="@string/app_name"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+
+            <TextView
+                android:id="@+id/food_calorie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:lines="1"
+                android:text="@string/app_name"
+                android:layout_below="@+id/food_name"
+                android:textSize="14sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/btnInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/food_linearlayout"
+            android:src="@drawable/ic_info_32px"
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

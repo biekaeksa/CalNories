@@ -50,9 +50,11 @@ public class LoginPresenter implements LoginContract.Presenter {
 
                     @Override
                     public void onNext(UserModel.UserDataModel userDataModel) {
-                        if(SessionUtils.login(loginView.getContext(), userDataModel.getData())) {
-                            loginView.showMainView(userDataModel);
+                        if(SessionUtils.login(loginView.getContext(), userDataModel.getResult().get(0))){
+                            loginView.showMainView(userDataModel.getResult());
                         }
+
+
                     }
                 });
     }

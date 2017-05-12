@@ -4,6 +4,8 @@ import com.spiderman.calnories.BasePresenter;
 import com.spiderman.calnories.BaseView;
 import com.spiderman.calnories.data.UserModel;
 
+import java.util.List;
+
 /**
  * Created by Biekaeksa on 3/17/2017.
  */
@@ -18,7 +20,7 @@ public class LoginContract {
 
         void showErrorMessage(String message);
 
-        void showMainView(UserModel.UserDataModel userDataModel);
+        void showMainView(List<UserModel> userDataModel);
 
     }
 

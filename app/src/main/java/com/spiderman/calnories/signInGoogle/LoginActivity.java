@@ -19,9 +19,12 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.spiderman.calnories.R;
+import com.spiderman.calnories.calories.CaloriesActivity;
 import com.spiderman.calnories.data.UserModel;
 import com.spiderman.calnories.main.MainActivity;
 import com.spiderman.calnories.util.SessionUtils;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,6 +41,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     String photoUrl;
     private LoginPresenter presenter;
     public ProgressDialog progressDialog;
+    private String idUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,8 +109,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 photoUrl = account.getPhotoUrl().toString();
             }
 
-
-            presenter.signInUp(account.getId(), account.getDisplayName(), account.getEmail(), photoUrl);
+            idUser = account.getId();
+            presenter.signInUp(idUser, account.getDisplayName(), account.getEmail(), photoUrl);
         }
     }
 
@@ -136,7 +140,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
    @Override
     public void showProgress() {
-        progressDialog = ProgressDialog.show(this, "", "Signing In...", true, false);
+        progressDialog = ProgressDialog.show(this, "", "Login...", true, false);
     }
 
     @Override
@@ -151,10 +155,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void showMainView(UserModel.UserDataModel userDataModel) {
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
+    public void showMainView(List<UserModel> userDataModel) {
+        if (userDataModel.get(0).getCalories_target() == 0){
+            Intent intent = new Intent(LoginActivity.this, CaloriesActivity.class);
+            intent.putExtra("id", idUser);
+            startActivity(intent);
+            finish();
+        }else {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
     }
 
 

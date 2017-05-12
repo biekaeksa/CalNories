@@ -1,5 +1,7 @@
 package com.spiderman.calnories.data;
 
+import java.util.List;
+
 /**
  * Created by Biekaeksa on 3/14/2017.
  */
@@ -9,6 +11,10 @@ public class UserModel {
     private String displayName;
     private String email;
     private String photoUrl;
+    private int weight;
+    private int height;
+    private int age;
+    private int calories_target;
 
     public String getId() {
         return id;
@@ -42,15 +48,47 @@ public class UserModel {
         this.photoUrl = photoUrl;
     }
 
-    public class UserDataModel extends BaseModel {
-        private UserModel data;
+    public int getWeight() {
+        return weight;
+    }
 
-        public UserModel getData(){
-            return data;
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getCalories_target() {
+        return calories_target;
+    }
+
+    public void setCalories_target(int calories_target) {
+        this.calories_target = calories_target;
+    }
+
+    public class UserDataModel extends BaseModel {
+        private List<UserModel> result;
+
+        public List<UserModel> getResult(){
+            return result;
         }
 
-        public void setData(UserModel data){
-            this.data = data;
+        public void setResult(List<UserModel> result){
+            this.result = result;
         }
     }
 }
