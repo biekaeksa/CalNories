@@ -7,7 +7,7 @@ package com.spiderman.calnories.util;
 public class AppConstants {
 
     public class APIUrl {
-        public static final String BASE_URL = "http://calnories.azurewebsites.net";
+        public static final String BASE_URL = "https://calnories.azurewebsites.net";
         public static final String BASE_API = BASE_URL + "/api/";
     }
 

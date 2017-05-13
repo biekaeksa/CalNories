@@ -12,6 +12,12 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.spiderman.calnories.R;
 import com.spiderman.calnories.category.CategoryAdapter;
 import com.spiderman.calnories.data.DummyModel;
@@ -27,16 +33,12 @@ import butterknife.ButterKnife;
 public class ProfileFragment extends Fragment {
     @BindView(R.id.rv_grid_profile)
     RecyclerView recyclerView;
+    @BindView(R.id.pie_chart)
+    PieChart pieChart;
     private ProfileAdapter adapter;
 
     ArrayList<DummyModel> list;
 
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
-    @BindView(R.id.progress_circular_txt)
-    TextView txtPercen;
-    Handler progressHandler = new Handler();
-    int i = 0;
 
 
     public ProfileFragment() {
@@ -50,11 +52,33 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup view = (ViewGroup)inflater.inflate(R.layout.fragment_profile, container, false);
         ButterKnife.bind(this, view);
-        initCircularProgressBar();
+        setPieChart();
         setRecyclerview();
         addDummy();
 
         return view;
+    }
+
+    private void setPieChart() {
+        pieChart.setUsePercentValues(true);
+        ArrayList<Entry> values = new ArrayList<Entry>();
+        values.add(new Entry(80f, 0));
+        values.add(new Entry(20f, 1));
+        PieDataSet dataSet = new PieDataSet(values, "Calories Result");
+
+        ArrayList<String> val = new ArrayList<String>();
+        val.add("Tercapai");
+        val.add("Belum");
+        PieData data = new PieData(val, dataSet);
+        dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+        dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
+
+        data.setValueFormatter(new PercentFormatter());
+        pieChart.setData(data);
+
+        data.setValueTextSize(8f);
+
+        pieChart.animateXY(1400, 1400);
     }
 
     private void addDummy() {
@@ -77,29 +101,6 @@ public class ProfileFragment extends Fragment {
         recyclerView.setAdapter(adapter);
     }
 
-    private void initCircularProgressBar() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (i < 100){
-                    i+=2;
-                    progressHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            progressBar.setProgress(i);
-                            txtPercen.setText("" + i + " %");
-                        }
-                    });
-                    try {
-                        Thread.sleep(300);
-                    }catch (InterruptedException e){
-                        e.printStackTrace();
-                    }
-                }
 
-            }
-        }).start();
-
-    }
 
 }

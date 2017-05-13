@@ -42,7 +42,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHelper
         @BindView(R.id.food_imageview)
         ImageView imgFood;
         @BindView(R.id.btnInfo)
-        ImageButton btnInfo;
+        ImageView btnInfo;
 
         public FoodViewHelper(View itemView) {
             super(itemView);

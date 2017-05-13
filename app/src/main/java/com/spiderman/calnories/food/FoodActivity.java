@@ -1,13 +1,17 @@
 package com.spiderman.calnories.food;
 
 import android.content.Context;
+import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.ViewGroup;
 
 import com.spiderman.calnories.R;
@@ -40,8 +44,6 @@ public class FoodActivity extends AppCompatActivity implements FoodContract.View
         getSupportActionBar().setTitle("Food");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setCustomView(R.layout.activity_main);
-        cok = getIntent().getStringExtra("category");
         initPresenter();
         onAttachView();
         setRecyclerview();
@@ -90,6 +92,16 @@ public class FoodActivity extends AppCompatActivity implements FoodContract.View
     @Override
     public void onAttachView() {
         presenter.onAttach(this);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
