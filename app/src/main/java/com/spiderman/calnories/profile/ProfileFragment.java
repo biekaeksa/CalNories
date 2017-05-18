@@ -20,6 +20,7 @@ import com.spiderman.calnories.R;
 import com.spiderman.calnories.data.DummyModel;
 import com.spiderman.calnories.util.StringHelper;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -38,6 +39,7 @@ public class ProfileFragment extends Fragment {
     private ProfileAdapter adapter;
     Calendar calendar;
     private String tanggal;
+    private Handler handler = new Handler();
 
     ArrayList<DummyModel> list;
 
@@ -53,11 +55,22 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_profile, container, false);
         ButterKnife.bind(this, view);
+        handler.postDelayed(runnable, 1000);
         setRecyclerview();
         addDummy();
 
         return view;
     }
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy ");
+            String strDate = dateFormat.format(calendar.getTime());
+            txtTanggal.setText(strDate);
+        }
+    };
 
 
 

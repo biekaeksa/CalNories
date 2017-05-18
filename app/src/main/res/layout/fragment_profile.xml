@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorGrayBakcground"
+    android:background="@android:color/white"
     tools:context="com.spiderman.calnories.profile.ProfileFragment">
 
     <RelativeLayout
@@ -36,7 +36,6 @@
             android:id="@+id/profile_textview_tanggal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="27 November 1995"
             android:textColor="@android:color/white"
             android:textSize="16sp"
             android:fontFamily="sans-serif-condensed"
