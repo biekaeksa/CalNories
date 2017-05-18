@@ -34,6 +34,10 @@ public class ReminderFragment extends Fragment implements CompoundButton.OnCheck
     TextView edtDinner;
     @BindView(R.id.switch_pagi)
     SwitchCompat switchPagi;
+    @BindView(R.id.switch_siang)
+    SwitchCompat switchSiang;
+    @BindView(R.id.switch_malam)
+    SwitchCompat switchMalam;
     private java.util.Calendar calendar;
     private String tanggalBreakfast;
     private String tanggalLunch;
@@ -111,24 +115,18 @@ public class ReminderFragment extends Fragment implements CompoundButton.OnCheck
             case R.id.switch_pagi:
                 setSwitchState(b);
                 break;
+            case R.id.switch_siang:
+                setSwitchState(b);
+                break;
+            case R.id.switch_malam:
+                setSwitchState(b);
+                break;
         }
     }
 
     private void setSwitchState(boolean state){
         if(state){
-            calendar = java.util.Calendar.getInstance();
-            final int mHour = calendar.get(java.util.Calendar.HOUR_OF_DAY);
-            final int mMin = calendar.get(java.util.Calendar.MINUTE);
-
-            TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
-                @Override
-                public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-                    tanggalBreakfast = StringHelper.convertTimeToString(hour, minute);
-                    edtBreakfast.setText(tanggalBreakfast);
-                    Toast.makeText(getActivity(), "Berhasil", Toast.LENGTH_SHORT).show();
-                }
-            }, mHour, mMin, false);
-            timePickerDialog.show();
+            Toast.makeText(getActivity(), "Berjalan", Toast.LENGTH_SHORT).show();
         }else {
             Toast.makeText(getActivity(), "Berhenti", Toast.LENGTH_SHORT).show();
         }
