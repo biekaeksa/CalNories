@@ -66,7 +66,7 @@ public class ProfileFragment extends Fragment {
         @Override
         public void run() {
             Calendar calendar = Calendar.getInstance();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy ");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy ");
             String strDate = dateFormat.format(calendar.getTime());
             txtTanggal.setText(strDate);
         }

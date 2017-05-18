@@ -99,8 +99,7 @@
             android:layout_height="25dp"
             android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:background="@android:color/black" />
-        "
+            android:background="@color/colorPrimary" />
 
         <RadioButton
             android:id="@+id/female"
@@ -151,7 +150,7 @@
             android:layout_height="25dp"
             android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:background="@android:color/black" />
+            android:background="@color/colorPrimary" />
 
         <RadioButton
             android:id="@+id/sedang"
@@ -170,7 +169,7 @@
             android:layout_height="25dp"
             android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:background="@android:color/black" />
+            android:background="@color/colorPrimary" />
 
         <RadioButton
             android:id="@+id/rendah"

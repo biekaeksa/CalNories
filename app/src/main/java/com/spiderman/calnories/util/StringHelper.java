@@ -24,17 +24,36 @@ public class StringHelper {
         String year = String.valueOf(yearInt);
         String month = String.valueOf(monthOfYear + 1);
         String day = String.valueOf(dayOfMonth);
+        String bulan = "";
 
-        if (monthOfYear < 10) {
-            month = "0" + month;
+
+        if(month.equals("1")){
+            bulan = "Januari";
+        }else if(month.equals("2")){
+            bulan = "Februari";
+        }else if(month.equals("3")){
+            bulan = "Maret";
+        }else if(month.equals("4")){
+            bulan = "April";
+        }else if(month.equals("5")){
+            bulan = "Mei";
+        }else if(month.equals("6")){
+            bulan = "Juni";
+        }else if(month.equals("7")){
+            bulan = "Juli";
+        }else if(month.equals("8")){
+            bulan = "Agustus";
+        }else if(month.equals("9")){
+            bulan = "September";
+        }else if(month.equals("10")){
+            bulan = "Oktober";
+        }else if(month.equals("11")){
+            bulan = "November";
+        }else if(month.equals("12")){
+            bulan = "Desember";
         }
 
-        if (dayOfMonth < 10) {
-            day = "0" + day;
-        }
 
-
-
-        return day + "/" + month + "/" + year;
+        return day + " " + bulan + " " + year;
     }
 }
