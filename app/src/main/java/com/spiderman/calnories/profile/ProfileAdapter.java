@@ -49,9 +49,9 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
 
 
     public class ProfileViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.profile_calorie)
+        @BindView(R.id.profile_kalori)
         TextView txtCalorie;
-        @BindView(R.id.profile_target)
+        @BindView(R.id.profile_category)
         TextView txtTarget;
         public ProfileViewHolder(View itemView) {
             super(itemView);

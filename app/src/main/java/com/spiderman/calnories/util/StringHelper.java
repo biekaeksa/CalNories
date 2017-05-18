@@ -19,4 +19,22 @@ public class StringHelper {
 
         return hour+":"+minute;
     }
+
+    public static String convertCalendarToString(int yearInt, int monthOfYear, int dayOfMonth) {
+        String year = String.valueOf(yearInt);
+        String month = String.valueOf(monthOfYear + 1);
+        String day = String.valueOf(dayOfMonth);
+
+        if (monthOfYear < 10) {
+            month = "0" + month;
+        }
+
+        if (dayOfMonth < 10) {
+            day = "0" + day;
+        }
+
+
+
+        return day + "/" + month + "/" + year;
+    }
 }

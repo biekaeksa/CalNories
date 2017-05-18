@@ -7,48 +7,53 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/colorGrid"
+        android:id="@+id/relative_Circle">
 
+        <com.github.pavlospt.CircleView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/fragment_circular_view"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            app:cv_titleText="100%"
+            app:cv_titleColor="@color/colorPrimary"
+            app:cv_titleSize="24sp"
+            app:cv_subtitleText="2400 kkal"
+            app:cv_subtitleColor="@color/colorPrimary"
+            app:cv_fillColor="@android:color/white"
+            app:cv_strokeColorValue="@color/colorPrimaryDark"
+            app:cv_backgroundColorValue="@color/colorPrimary"
+            android:layout_margin="5dp"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/relative_black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relative_Circle"
+        android:background="@android:color/black">
         <TextView
-            android:id="@+id/txtName"
+            android:id="@+id/profile_textview_tanggal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:text="Calories"
-            android:layout_margin="10dp"/>
-
-        <TextView
-            android:id="@+id/txtCalorie"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/txtName"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="2100 kkal"
-            android:layout_margin="10dp"/>
-
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/pie_chart"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@+id/txtCalorie">
-
-
-        </com.github.mikephil.charting.charts.PieChart>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_grid_profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/pie_chart"
-            android:layout_margin="8dp">
-
-        </android.support.v7.widget.RecyclerView>
+            android:text="27 November 1995"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-condensed"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"/>
 
     </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_grid_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relative_black"
+        android:layout_margin="1dp">
+
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

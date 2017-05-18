@@ -48,7 +48,7 @@
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:background="@color/colorGreen"/>
+            android:background="@color/colorAccent"/>
 
     </RelativeLayout>
 </RelativeLayout>

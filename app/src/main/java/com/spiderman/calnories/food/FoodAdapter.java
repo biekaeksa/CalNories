@@ -69,8 +69,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHelper
         holder.txtName.setText(foodModel.getFood_name());
         Glide.with(context)
                 .load(foodModel.getPhoto_url())
-                .error(ContextCompat.getDrawable(context, R.drawable.ic_circle))
-                .placeholder(ContextCompat.getDrawable(context, R.drawable.ic_circle))
                 .into(holder.imgFood);
     }
 
