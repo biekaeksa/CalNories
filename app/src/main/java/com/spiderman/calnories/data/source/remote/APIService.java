@@ -1,6 +1,8 @@
 package com.spiderman.calnories.data.source.remote;
 
 import com.spiderman.calnories.data.FoodModel;
+import com.spiderman.calnories.data.ProfileModel;
+import com.spiderman.calnories.data.SportsModel;
 import com.spiderman.calnories.data.UserModel;
 import com.spiderman.calnories.util.AppConstants;
 
@@ -40,6 +42,23 @@ public interface APIService {
 
     @GET("food/{category}")
     Observable<FoodModel.FoodDataModel> loadFoodCategory(@Path("category") String categori);
+
+
+    @FormUrlEncoded
+    @POST("user/caloriedaily/{id}")
+    Observable<FoodModel> postDailyCalorie(@Path("id") String id, @Field("food_calorie") Float food_calorie,
+                                                    @Field("food_id") String food_id);
+
+    @GET("user/getcalorie/{id}")
+    Observable<ProfileModel.ProfileDataModel> getDailyCalorie(@Path("id") String id);
+
+    @GET("sports")
+    Observable<SportsModel.SportsDataModel> getListSports();
+
+    @FormUrlEncoded
+    @POST("sports/{id}")
+    Observable<SportsModel.SportsDataaModel> postCalorieSports(@Path("id") String id, @Field("calories_burn") float calories_burn,
+                                                               @Field("id_activity") String id_activity);
 
 
     class factory {

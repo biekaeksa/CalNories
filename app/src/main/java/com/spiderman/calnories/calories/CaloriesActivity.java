@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -65,6 +66,8 @@ public class CaloriesActivity extends AppCompatActivity implements CaloriesContr
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarTitle);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Data Calorie");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         initPresenter();
         onAttachView();
         gender.setOnCheckedChangeListener(this);
@@ -72,6 +75,11 @@ public class CaloriesActivity extends AppCompatActivity implements CaloriesContr
 
     }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     private void initPresenter() {
         presenter = new CaloriesPresenter();
@@ -90,6 +98,16 @@ public class CaloriesActivity extends AppCompatActivity implements CaloriesContr
     @Override
     public void onDetachView() {
         presenter.onDetach();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -171,11 +189,11 @@ public class CaloriesActivity extends AppCompatActivity implements CaloriesContr
                 presenter.addCalori(getIntent().getStringExtra("id"), Float.parseFloat(beratBadan.getText().toString()),
                         Float.parseFloat(tinggiBadan.getText().toString()),
                         Integer.parseInt(umur.getText().toString()), (int) Math.round(kalori));
-            }else {
+            } else {
                 Toast.makeText(CaloriesActivity.this, "Aktifitas atau jenis kelamin belum dipilih", Toast.LENGTH_SHORT).show();
             }
 
-        }else {
+        } else {
             Toast.makeText(CaloriesActivity.this, "Data tidak boleh kosong", Toast.LENGTH_SHORT).show();
         }
 

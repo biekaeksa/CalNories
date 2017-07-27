@@ -4,6 +4,8 @@ package com.spiderman.calnories.category;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import com.spiderman.calnories.R;
 import com.spiderman.calnories.data.CategoryModel;
 import com.spiderman.calnories.food.FoodActivity;
+import com.spiderman.calnories.sports.SportsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +50,11 @@ public class CategoryFragment extends Fragment implements  CategoryContract.View
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
     public void onClickCategory(View view, int position) {
         Intent intent;
         if(list.get(position).getKategori() == "Breakfast"){
@@ -65,17 +73,28 @@ public class CategoryFragment extends Fragment implements  CategoryContract.View
             intent = new Intent(getActivity(), FoodActivity.class);
             intent.putExtra("category", "teatime");
             startActivity(intent);
+        }else if(list.get(position).getKategori() == "Snacking") {
+            intent = new Intent(getActivity(), FoodActivity.class);
+            intent.putExtra("category", "snacking");
+            startActivity(intent);
+        }else if(list.get(position).getKategori() == "Drink") {
+            intent = new Intent(getActivity(), FoodActivity.class);
+            intent.putExtra("category", "drink");
+            startActivity(intent);
+        }else if(list.get(position).getKategori() == "Sports") {
+            intent = new Intent(getActivity(), SportsActivity.class);
+            startActivity(intent);
         }
     }
 
     private void setRecyclerview() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()){
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2){
             @Override
-            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
-                return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
+            public boolean canScrollVertically() {
+                return false;
             }
-        });
+        };
+        recyclerView.setLayoutManager(layoutManager);
         adapter = new CategoryAdapter(getContext(), new ArrayList<CategoryModel>(), this);
         recyclerView.setAdapter(adapter);
     }
@@ -97,11 +116,12 @@ public class CategoryFragment extends Fragment implements  CategoryContract.View
 
     public void addCategory(){
         list = new ArrayList<>();
-        list.add(new CategoryModel("Breakfast", R.drawable.ic_sunrise_24));
-        list.add(new CategoryModel("Lunch", R.drawable.ic_sun_24));
-        list.add(new CategoryModel("Dinner", R.drawable.ic_night_24));
-        list.add(new CategoryModel("Teatime", R.drawable.ic_cheese_24));
-        list.add(new CategoryModel("Sports", R.drawable.ic_sports_24));
+        list.add(new CategoryModel("Breakfast", R.drawable.cereals));
+        list.add(new CategoryModel("Lunch", R.drawable.friedchicken));
+        list.add(new CategoryModel("Dinner", R.drawable.dinner));
+        list.add(new CategoryModel("Snacking", R.drawable.sandwich));
+        list.add(new CategoryModel("Drink", R.drawable.glass));
+        list.add(new CategoryModel("Sports", R.drawable.running));
         adapter.replaceData(list);
 
     }

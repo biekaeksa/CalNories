@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/white"
     tools:context="com.spiderman.calnories.food.FoodActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarFood"
+        style="@style/MyToolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        style="@style/MyToolbar"
-        app:titleTextAppearance="@style/ToolbarTextAppearance.Title"/>
+        app:titleTextAppearance="@style/ToolbarTextAppearance.Title" />
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/food_swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbarFood"
-        android:layout_marginTop="@dimen/activity_vertical_margin">
+        android:layout_below="@id/toolbarFood">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_food"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-</android.support.v4.widget.SwipeRefreshLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 
 </RelativeLayout>

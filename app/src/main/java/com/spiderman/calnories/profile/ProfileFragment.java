@@ -1,47 +1,51 @@
 package com.spiderman.calnories.profile;
 
-
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
+import com.github.pavlospt.CircleView;
 import com.spiderman.calnories.R;
-import com.spiderman.calnories.data.DummyModel;
-import com.spiderman.calnories.util.StringHelper;
+import com.spiderman.calnories.data.ProfileModel;
+import com.spiderman.calnories.data.UserModel;
+import com.spiderman.calnories.util.SessionUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements ProfileContract.View {
     @BindView(R.id.rv_grid_profile)
     RecyclerView recyclerView;
-    @BindView(R.id.profile_textview_tanggal)
-    TextView txtTanggal;
     private ProfileAdapter adapter;
     Calendar calendar;
     private String tanggal;
     private Handler handler = new Handler();
+    ProfilPresenter presenter;
 
-    ArrayList<DummyModel> list;
+    @BindView(R.id.profile_textview_target)
+    TextView textViewTarget;
+    @BindView(R.id.fragment_circular_view)
+    CircleView circleViewCalorie;
+
+    float persentase;
+
+    ArrayList<ProfileModel.ProfileDataModel> list;
 
 
     public ProfileFragment() {
@@ -55,36 +59,27 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_profile, container, false);
         ButterKnife.bind(this, view);
-        handler.postDelayed(runnable, 1000);
+        initPresenter();
+        loadDataProfile(SessionUtils.getLoggedUser(getContext()));
+        onAttachView();
+
         setRecyclerview();
-        addDummy();
+
 
         return view;
     }
 
-    private Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            Calendar calendar = Calendar.getInstance();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy ");
-            String strDate = dateFormat.format(calendar.getTime());
-            txtTanggal.setText(strDate);
-        }
-    };
 
-
-
-    private void addDummy() {
-        list = new ArrayList<>();
-        list.add(new DummyModel("Target Calorie", 2100));
-        list.add(new DummyModel("Breakfast", 800));
-        list.add(new DummyModel("Lunch", 800));
-        list.add(new DummyModel("Dinner", 800));
-        list.add(new DummyModel("Teatime", 400));
-        list.add(new DummyModel("Sports", 700));
-        adapter.replaceData(list);
-
+    private void loadDataProfile(UserModel userModel) {
+        presenter.loadData(userModel.getIdUser());
     }
+
+
+    private void initPresenter() {
+        presenter = new ProfilPresenter();
+    }
+
+
 
     private void setRecyclerview() {
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2){
@@ -95,25 +90,59 @@ public class ProfileFragment extends Fragment {
         };
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new ProfileAdapter(getContext(), new ArrayList<DummyModel>());
+        adapter = new ProfileAdapter(getActivity(), new ArrayList<ProfileModel>());
         recyclerView.setAdapter(adapter);
     }
 
-    @OnClick(R.id.profile_textview_tanggal)
-    public void dateProfileClicked(){
-        calendar = java.util.Calendar.getInstance();
-        final int mDay = calendar.get(Calendar.DAY_OF_MONTH);
-        final int mMonth = calendar.get(Calendar.MONTH);
-        final int mYears = calendar.get(Calendar.YEAR);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                tanggal = StringHelper.convertCalendarToString(i, i1, i2);
-                txtTanggal.setText(tanggal);
-            }
-        },mYears,mMonth,mDay);
-        datePickerDialog.show();
+
+    @Override
+    public void onAttachView() {
+        presenter.onAttach(this);
+    }
+
+    @Override
+    public void onDetachView() {
+        presenter.onDetach();
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public void showErrorMessage(String message) {
+
+    }
+
+    @Override
+    public void showDataProfile(List<ProfileModel> foodModels) {
+        adapter.replaceData(foodModels);
+    }
+
+    @Override
+    public void getTargetCalorie(float targetCalorie, float calorieDaily) {
+        textViewTarget.setText(String.valueOf(targetCalorie)+" kkal");
+        circleViewCalorie.setSubtitleText(String.valueOf(calorieDaily)+" kkal");
+
+        persentase = (calorieDaily / SessionUtils.getLoggedUser(getContext()).getCalories_target()) * 100;
+        if (persentase > 100){
+            circleViewCalorie.setTitleText("100%");
+        }else {
+            circleViewCalorie.setTitleText(String.valueOf(Math.round(persentase))+"%");
+        }
+
     }
 
 

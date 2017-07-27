@@ -49,7 +49,10 @@ public class CaloriesPresenter implements CaloriesContract.Presenter {
 
                     @Override
                     public void onNext(UserModel.UserDataModel userDataModel) {
+                        SessionUtils.logout(caloriesView.getContext());
+                        if(SessionUtils.login(caloriesView.getContext(), userDataModel.getResult())){
                             caloriesView.showMainView(userDataModel);
+                        }
 
                     }
                 });

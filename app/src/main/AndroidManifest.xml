@@ -14,7 +14,6 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".splashscreen.SpalshActivity"
-
             android:label="@string/app_name">
 
             <!-- android:theme="@style/AppTheme.NoActionBar" -->
@@ -27,7 +26,9 @@
         <activity android:name=".signInGoogle.LoginActivity" />
         <activity android:name=".calories.CaloriesActivity" />
         <activity android:name=".food.FoodActivity" />
-        <activity android:name=".main.MainActivity"></activity>
+        <activity android:name=".main.MainActivity" />
+        <activity android:name=".detailfood.DetailFoodActivity" />
+        <activity android:name=".sports.SportsActivity"></activity>
     </application>
 
 </manifest>

@@ -160,8 +160,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void showMainView(List<UserModel> userDataModel) {
-        if (userDataModel.get(0).getCalories_target() == 0){
+    public void showMainView(UserModel userDataModel) {
+        if (userDataModel.getCalories_target() == 0){
             Intent intent = new Intent(LoginActivity.this, CaloriesActivity.class);
             intent.putExtra("id", idUser);
             startActivity(intent);

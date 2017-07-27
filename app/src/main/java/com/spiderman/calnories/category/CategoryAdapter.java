@@ -33,9 +33,9 @@ public class CategoryAdapter  extends RecyclerView.Adapter<CategoryAdapter.Categ
     }
 
     public class CategoryViewHelper extends RecyclerView.ViewHolder implements View.OnClickListener  {
-        @BindView(R.id.category_name)
+        @BindView(R.id.category_textview_judul)
         TextView txtCategory;
-        @BindView(R.id.imgIcon)
+        @BindView(R.id.category_imageview_icon)
         ImageView imgIcon;
 
         public CategoryViewHelper(View itemView) {

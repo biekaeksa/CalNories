@@ -24,6 +24,7 @@ import com.spiderman.calnories.category.CategoryFragment;
 import com.spiderman.calnories.profile.ProfileFragment;
 import com.spiderman.calnories.reminder.ReminderFragment;
 import com.spiderman.calnories.signInGoogle.LoginActivity;
+import com.spiderman.calnories.userprofile.UserFragment;
 import com.spiderman.calnories.util.SessionUtils;
 
 import butterknife.BindView;
@@ -50,11 +51,15 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     break;
                 case R.id.nav_calorie :
                     fragment = new CategoryFragment();
-                    getSupportActionBar().setTitle("Calorie");
+                    getSupportActionBar().setTitle("Category");
                     break;
                 case R.id.nav_home :
                     fragment = new ProfileFragment();
                     getSupportActionBar().setTitle("Home");
+                    break;
+                case R.id.nav_profile :
+                    fragment = new UserFragment();
+                    getSupportActionBar().setTitle("Profile");
                     break;
             }
             final FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -63,6 +68,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         }
     };
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

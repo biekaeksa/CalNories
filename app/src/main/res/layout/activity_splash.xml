@@ -11,5 +11,5 @@ tools:context="com.spiderman.calnories.splashscreen.SpalshActivity">
     android:layout_width="wrap_content"
     android:layout_height="200dp"
     android:layout_centerInParent="true"
-    android:src="@drawable/logo" />
+    android:src="@drawable/ic_logo" />
 </RelativeLayout>

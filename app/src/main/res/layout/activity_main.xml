@@ -28,12 +28,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/colorGrayBakcground"
-        app:itemTextColor="@color/colorPrimary"
+        app:itemTextColor="@drawable/nav_item_color_state"
         app:elevation="5dp"
-        android:fontFamily="sans-serif-condensed"
-        app:itemIconTint="@color/colorPrimary"
+        android:fontFamily="sans-serif"
+        app:itemIconTint="@drawable/nav_item_color_state"
         app:menu="@menu/bottom_menu">
-
 
     </android.support.design.widget.BottomNavigationView>
 

@@ -1,7 +1,11 @@
 package com.spiderman.calnories.reminder;
 
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SwitchCompat;
@@ -10,13 +14,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.spiderman.calnories.R;
 import com.spiderman.calnories.util.StringHelper;
+
+import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,11 +43,25 @@ public class ReminderFragment extends Fragment implements CompoundButton.OnCheck
     SwitchCompat switchSiang;
     @BindView(R.id.switch_malam)
     SwitchCompat switchMalam;
-    private java.util.Calendar calendar;
+    private java.util.Calendar calendarPagi, calendarSiang, calendarMalam;
     private String tanggalBreakfast;
     private String tanggalLunch;
     private String tanggalDinner;
 
+    private PendingIntent pendingIntent;
+    AlarmManager alarmManager;
+
+    private static ReminderFragment inst;
+
+    public static ReminderFragment instance(){
+        return inst;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        inst = this;
+    }
 
     public ReminderFragment() {
         // Required empty public constructor
@@ -54,6 +73,7 @@ public class ReminderFragment extends Fragment implements CompoundButton.OnCheck
                              Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_reminder, container, false);
         ButterKnife.bind(this, view);
+        alarmManager = (AlarmManager)getContext().getSystemService(Context.ALARM_SERVICE);
         switchPagi.setOnCheckedChangeListener(this);
         return view;
     }
@@ -61,15 +81,21 @@ public class ReminderFragment extends Fragment implements CompoundButton.OnCheck
 
     @OnClick(R.id.time_breakfast)
     public void clickTimeBreakfast() {
-        calendar = java.util.Calendar.getInstance();
-        final int mHour = calendar.get(java.util.Calendar.HOUR_OF_DAY);
-        final int mMin = calendar.get(java.util.Calendar.MINUTE);
+        calendarPagi = java.util.Calendar.getInstance();
+
+        final int mHour = calendarPagi.get(java.util.Calendar.HOUR_OF_DAY);
+        final int mMin = calendarPagi.get(java.util.Calendar.MINUTE);
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+                calendarPagi = java.util.Calendar.getInstance();
+                calendarPagi.set(Calendar.HOUR_OF_DAY, hour);
+                calendarPagi.set(Calendar.MINUTE, minute);
+                calendarPagi.add(Calendar.DATE,1);
                 tanggalBreakfast = StringHelper.convertTimeToString(hour, minute);
                 edtBreakfast.setText(tanggalBreakfast);
+
             }
         }, mHour, mMin, false);
         timePickerDialog.show();
@@ -78,9 +104,9 @@ public class ReminderFragment extends Fragment implements CompoundButton.OnCheck
 
     @OnClick(R.id.time_lunch)
     public void clickTimeLunch() {
-        calendar = java.util.Calendar.getInstance();
-        final int mHour = calendar.get(java.util.Calendar.HOUR_OF_DAY);
-        final int mMin = calendar.get(java.util.Calendar.MINUTE);
+        calendarSiang = java.util.Calendar.getInstance();
+        final int mHour = calendarSiang.get(java.util.Calendar.HOUR_OF_DAY);
+        final int mMin = calendarSiang.get(java.util.Calendar.MINUTE);
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
             @Override
@@ -94,9 +120,9 @@ public class ReminderFragment extends Fragment implements CompoundButton.OnCheck
 
     @OnClick(R.id.time_dinner)
     public void clickTimeDinner() {
-        calendar = java.util.Calendar.getInstance();
-        final int mHour = calendar.get(java.util.Calendar.HOUR_OF_DAY);
-        final int mMin = calendar.get(java.util.Calendar.MINUTE);
+        calendarMalam = java.util.Calendar.getInstance();
+        final int mHour = calendarMalam.get(java.util.Calendar.HOUR_OF_DAY);
+        final int mMin = calendarMalam.get(java.util.Calendar.MINUTE);
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
             @Override
@@ -113,22 +139,26 @@ public class ReminderFragment extends Fragment implements CompoundButton.OnCheck
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         switch (compoundButton.getId()) {
             case R.id.switch_pagi:
-                setSwitchState(b);
+                //setSwitchState(b);
                 break;
             case R.id.switch_siang:
-                setSwitchState(b);
+                //setSwitchState(b);
                 break;
             case R.id.switch_malam:
-                setSwitchState(b);
+                //setSwitchState(b);
                 break;
         }
     }
 
     private void setSwitchState(boolean state){
         if(state){
-            Toast.makeText(getActivity(), "Berjalan", Toast.LENGTH_SHORT).show();
+            Log.e("Alarm ", "On");
+            Intent i = new Intent(getContext(), AlarmReceiver.class);
+            pendingIntent = PendingIntent.getBroadcast(getContext(), 1, i, 1 );
+            alarmManager.set(AlarmManager.RTC_WAKEUP, calendarPagi.getTimeInMillis(), pendingIntent);
         }else {
-            Toast.makeText(getActivity(), "Berhenti", Toast.LENGTH_SHORT).show();
+            alarmManager.cancel(pendingIntent);
+            Log.e("Alarm ", "Off");
         }
     }
 }

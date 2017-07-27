@@ -26,11 +26,11 @@
             android:id="@+id/bb"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif"
+            android:padding="8dp"
             android:hint="Berat Badan"
+            android:textStyle="normal"
+            android:textSize="14sp"
             android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
 
@@ -42,11 +42,11 @@
             android:id="@+id/tb"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="16dp"
-            android:fontFamily="sans-serif-condensed"
+            android:padding="8dp"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif"
             android:hint="Tinggi Badan"
-            android:inputType="number"
-            android:textColorHint="@android:color/holo_orange_light" />
+            android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -57,8 +57,9 @@
             android:id="@+id/umur"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="16dp"
-            android:fontFamily="sans-serif-condensed"
+            android:padding="8dp"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif"
             android:hint="Umur"
             android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
@@ -66,13 +67,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="5dp"
-        android:fontFamily="sans-serif-condensed"
+        android:padding="8dp"
+        android:fontFamily="sans-serif"
         android:text="Aktivitas Olahraga"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <RadioGroup
@@ -89,9 +87,9 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="5dp"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif"
             android:text="Male"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:theme="@style/MyRadioButton" />
 
         <View
@@ -109,9 +107,9 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="5dp"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif"
             android:text="Female"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:theme="@style/MyRadioButton" />
     </RadioGroup>
 
@@ -122,9 +120,9 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="5dp"
-        android:fontFamily="sans-serif-condensed"
+        android:fontFamily="sans-serif"
         android:text="Aktivitas Olahraga"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <RadioGroup
@@ -141,8 +139,9 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="5dp"
+            android:fontFamily="sans-serif"
             android:text="Berat"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:theme="@style/MyRadioButton" />
 
         <View
@@ -160,8 +159,9 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="5dp"
+            android:fontFamily="sans-serif"
             android:text="Sedang"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:theme="@style/MyRadioButton" />
 
         <View
@@ -180,7 +180,8 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="5dp"
             android:text="Ringan"
-            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textSize="14sp"
             android:theme="@style/MyRadioButton" />
     </RadioGroup>
 
@@ -190,11 +191,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:background="@color/colorPrimary"
-        android:fontFamily="sans-serif-condensed"
+        android:fontFamily="sans-serif"
         android:text="Save"
-        android:layout_margin="10dp"
+        android:layout_margin="8dp"
         android:textColor="@android:color/background_light"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         android:theme="@style/MyButton" />
 

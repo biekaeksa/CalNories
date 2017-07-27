@@ -20,7 +20,7 @@ public class LoginContract {
 
         void showErrorMessage(String message);
 
-        void showMainView(List<UserModel> userDataModel);
+        void showMainView(UserModel userDataModel);
 
     }
 

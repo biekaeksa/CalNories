@@ -2,14 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:padding="8dp"
     tools:context="com.spiderman.calnories.category.CategoryFragment">
 
-    <android.support.v7.widget.RecyclerView
+    <android.support.v7.widget.RecyclerView xmlns:tools="http://schemas.android.com/tools"
+        tools:listitem="@layout/fragment_category_row_item"
         android:id="@+id/rv_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
 
 </LinearLayout>

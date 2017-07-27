@@ -7,7 +7,7 @@ import java.util.List;
  */
 
 public class UserModel {
-    private String id;
+    private String idUser;
     private String displayName;
     private String email;
     private String photoUrl;
@@ -16,12 +16,12 @@ public class UserModel {
     private int age;
     private int calories_target;
 
-    public String getId() {
-        return id;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
     public String getDisplayName() {
@@ -81,13 +81,13 @@ public class UserModel {
     }
 
     public class UserDataModel extends BaseModel {
-        private List<UserModel> result;
+        private UserModel result;
 
-        public List<UserModel> getResult(){
+        public UserModel getResult(){
             return result;
         }
 
-        public void setResult(List<UserModel> result){
+        public void setResult(UserModel result){
             this.result = result;
         }
     }

@@ -14,6 +14,15 @@ public class FoodModel {
     private String category;
     private String receipt;
     private String how_to_make;
+    private String messege;
+
+    public String getMessege() {
+        return messege;
+    }
+
+    public void setMessege(String messege) {
+        this.messege = messege;
+    }
 
     public String getId_food() {
         return id_food;
@@ -82,4 +91,5 @@ public class FoodModel {
             this.result = result;
         }
     }
+
 }

@@ -7,9 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.github.pavlospt.CircleView;
 import com.spiderman.calnories.R;
 import com.spiderman.calnories.category.CategoryAdapter;
 import com.spiderman.calnories.data.DummyModel;
+import com.spiderman.calnories.data.ProfileModel;
 
 import java.util.List;
 
@@ -22,9 +24,9 @@ import butterknife.ButterKnife;
 
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileViewHolder> {
     private Context context;
-    private List<DummyModel> list;
+    private List<ProfileModel> list;
 
-    public ProfileAdapter(Context context, List<DummyModel> list) {
+    public ProfileAdapter(Context context, List<ProfileModel> list) {
         this.context = context;
         this.list = list;
     }
@@ -37,9 +39,11 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
 
     @Override
     public void onBindViewHolder(ProfileViewHolder holder, int position) {
-        DummyModel model = list.get(position);
-        holder.txtCalorie.setText(model.getGridCalorie()+ " kkal");
-        holder.txtTarget.setText(model.getGridDummy());
+        ProfileModel model = list.get(position);
+
+        holder.txtCalorie.setText(model.getKkal()+ " kkal");
+        holder.txtTarget.setText(model.getCategory());
+
     }
 
     @Override
@@ -59,8 +63,9 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
         }
     }
 
-    public void replaceData(List<DummyModel> dummyModels){
-        this.list = dummyModels;
+    public void replaceData(List<ProfileModel> profileModels){
+        this.list = profileModels;
         notifyDataSetChanged();
     }
+
 }

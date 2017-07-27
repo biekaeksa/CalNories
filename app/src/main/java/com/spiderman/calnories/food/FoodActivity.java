@@ -1,21 +1,27 @@
 package com.spiderman.calnories.food;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 
 import com.spiderman.calnories.R;
 import com.spiderman.calnories.data.FoodModel;
+import com.spiderman.calnories.detailfood.DetailFoodActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +37,8 @@ public class FoodActivity extends AppCompatActivity implements FoodContract.View
     RecyclerView recyclerView;
     @BindView(R.id.food_swipe_refresh)
     SwipeRefreshLayout refreshLayout;
+    @BindView(R.id.toolbarFood)
+    Toolbar toolbar;
 
     String cok;
 
@@ -39,7 +47,6 @@ public class FoodActivity extends AppCompatActivity implements FoodContract.View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food);
         ButterKnife.bind(this);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarFood);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Food");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -62,14 +69,34 @@ public class FoodActivity extends AppCompatActivity implements FoodContract.View
         refreshLayout.setOnRefreshListener(this);
     }
 
-    private void setRecyclerview() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()){
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search, menu);
+        MenuItem searchh = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchh);
+        search(searchView);
+        return true;
+    }
+
+    public void search(SearchView searchView) {
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
             @Override
-            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
-                return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return true;
             }
         });
+    }
+
+    private void setRecyclerview() {
+        final GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerView.setLayoutManager(layoutManager);
         adapter = new FoodAdapter(getContext(), new ArrayList<FoodModel>(), this);
         recyclerView.setAdapter(adapter);
     }
@@ -96,7 +123,7 @@ public class FoodActivity extends AppCompatActivity implements FoodContract.View
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;
@@ -139,13 +166,22 @@ public class FoodActivity extends AppCompatActivity implements FoodContract.View
         adapter.replaceData(foodModels);
     }
 
-    @Override
-    public void onInfoFoodClick() {
 
-    }
-
-    public void loadData(){
+    public void loadData() {
         presenter.loadFood(getIntent().getStringExtra("category"));
         //presenter.loadFood();
+    }
+
+    @Override
+    public void onItemClick(String id, String makanan, String photo, Float kalori, String resep, String pembuatan) {
+        Intent i = new Intent(FoodActivity.this, DetailFoodActivity.class);
+        i.putExtra("id", id);
+        i.putExtra("nama_makanan", makanan);
+        i.putExtra("photo", photo);
+        i.putExtra("kalori", String.valueOf(kalori));
+        i.putExtra("resep", resep);
+        i.putExtra("pembuatan", pembuatan);
+        i.putExtra("category", getIntent().getStringExtra("category"));
+        startActivity(i);
     }
 }

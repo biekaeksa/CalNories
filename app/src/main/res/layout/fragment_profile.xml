@@ -16,10 +16,10 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_centerHorizontal="true"
-            app:cv_titleText="100%"
+            app:cv_titleText="0%"
+            app:cv_subtitleText="0 kkal"
             app:cv_titleColor="@color/colorPrimary"
             app:cv_titleSize="24sp"
-            app:cv_subtitleText="2400 kkal"
             app:cv_subtitleColor="@color/colorPrimary"
             app:cv_fillColor="@android:color/white"
             app:cv_strokeColorValue="@color/colorPrimaryDark"
@@ -33,7 +33,7 @@
         android:layout_below="@+id/relative_Circle"
         android:background="@android:color/black">
         <TextView
-            android:id="@+id/profile_textview_tanggal"
+            android:id="@+id/profile_textview_target"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"

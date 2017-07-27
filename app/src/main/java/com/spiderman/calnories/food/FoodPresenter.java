@@ -37,7 +37,6 @@ public class FoodPresenter implements FoodContract.Presenter  {
                 .subscribe(new Subscriber<FoodModel.FoodDataModel>() {
                     @Override
                     public void onCompleted() {
-                        Log.e("gatel", "cok");
                         foodView.hideProgress();
                     }
 
@@ -50,7 +49,6 @@ public class FoodPresenter implements FoodContract.Presenter  {
 
                     @Override
                     public void onNext(FoodModel.FoodDataModel foodDataModel) {
-                        Log.e("fak", "jancok");
                         foodView.showFoodData(foodDataModel.getResult());
                     }
                 });
